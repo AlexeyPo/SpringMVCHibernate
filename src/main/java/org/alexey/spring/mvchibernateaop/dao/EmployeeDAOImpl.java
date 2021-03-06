@@ -1,2 +1,26 @@
-package org.alexey.spring.mvchibernateaop.dao;public class EmployeeDAOImpl {
+package org.alexey.spring.mvchibernateaop.dao;
+
+import org.alexey.spring.mvchibernateaop.entity.Employee;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public class EmployeeDAOImpl implements EmployeeDAO {
+
+    private final SessionFactory sessionFactory;
+
+    public EmployeeDAOImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    @Override
+    public List<Employee> getAllEmployees() {
+        Session session = sessionFactory.getCurrentSession();
+        List<Employee> allEmployees = session.createQuery("from Employee", Employee.class).getResultList();
+
+        return allEmployees;
+    }
 }
