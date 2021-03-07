@@ -10,4 +10,4 @@
 *.rar
 .idea/
 target/
-applicationContext.xml
+*.iml
